@@ -1,0 +1,40 @@
+version: '3.7'
+
+services:
+  jenkins:
+    container_name: jenkins
+    hostname: jenkins-container
+    image: jenkins/jenkins:lts-jdk11
+    privileged: true
+    user: root
+    ports: 
+      - 8000:8080
+      - 50000:50000    
+    volumes:
+      - ./jenkins_home:/var/jenkins_home
+      - ./var/run/docker.sock:/var/run/docker.sock
+      - ./usr/local/bin/docker:/usr/local/bin/docker
+    networks:
+      - spring-network
+      
+  tomcat:
+    container_name: tomcat
+    hostname: tomcat-container
+    image: tomcat:8.5.16-jre8-alpine
+    privileged: true
+    user: root
+    ports: 
+      - 8001:8080 
+    environment:
+      CATALINA_BASE:   /usr/local/tomcat
+      CATALINA_HOME:   /usr/local/tomcat
+      CATALINA_TMPDIR: /usr/local/tomcat/temp
+      JRE_HOME:        /usr
+      CLASSPATH:       /usr/local/tomcat/bin/bootstrap.jar:/usr/local/tomcat/bin/tomcat-juli.jar
+
+    networks:
+      - spring-network
+
+networks:
+  spring-network:
+    driver: bridge
