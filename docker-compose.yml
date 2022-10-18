@@ -16,7 +16,11 @@ services:
       - ./usr/local/bin/docker:/usr/local/bin/docker
     networks:
       - spring-network
-      
+
+#MODIFICAR  vi conf/tomcat-users.xml 
+#<user username="admin" password="admin" roles="manager-gui,manager-script,manager-jmx,manager-status"/>
+#MODIFICAR vi webapps/manager/META-INF/context.xml
+#ALTERAR O CONTEXT ALLOW=".*"
   tomcat:
     container_name: tomcat
     hostname: tomcat-container
@@ -34,6 +38,56 @@ services:
 
     networks:
       - spring-network
+
+#OBS - ALTERAR VM.MAX 
+#WINDOWS: 
+#  wsl -d docker-desktop
+#  sysctl -w vm.max_map_count=262144 
+  sonarqube:
+    image: sonarqube:community
+    hostname: sonarqube
+    container_name: sonarqube
+    privileged: true
+    depends_on:
+      - db
+    environment:
+      - sonar.jdbc.username=sonar
+      - sonar.jdbc.password=sonar
+      - sonar.jdbc.url=jdbc:postgresql://db/sonar
+    volumes:
+      - sonarqube_data:/opt/sonarqube/data
+      - sonarqube_extensions:/opt/sonarqube/extensions
+      - sonarqube_logs:/opt/sonarqube/logs
+      - sonarqube_temp:/opt/sonarqube/temp
+
+    ports:
+      - "9000:9000"
+
+    networks:
+      - spring-network
+
+  db:
+    image: postgres:12
+    hostname: postgresql
+    container_name: postgresql
+    privileged: true
+    environment:
+      POSTGRES_USER: sonar
+      POSTGRES_PASSWORD: sonar
+      POSTGRES_DB: sonar
+    volumes:
+      - postgresql:/var/lib/postgresql
+      - postgresql_data:/var/lib/postgresql/data
+    networks:
+      - spring-network
+
+volumes:
+  sonarqube_data:
+  sonarqube_extensions:
+  sonarqube_logs:
+  sonarqube_temp:
+  postgresql:
+  postgresql_data:
 
 networks:
   spring-network:
