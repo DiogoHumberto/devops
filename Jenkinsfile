@@ -2,7 +2,7 @@ pipeline {
     agent any
     stages{
         stage ('Build do Projeto') {
-            steps {
+            withMaven  {
                 sh '''
                     cd springProject
                     mvn -version
