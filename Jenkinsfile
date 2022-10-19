@@ -5,7 +5,8 @@ pipeline {
             steps {
                 sh '''
                     cd springProject
-                    apt-get mvn install
+                    apt install maven
+                    mvn -version
                     mvn clean package -DskipTests
                 '''
             }
