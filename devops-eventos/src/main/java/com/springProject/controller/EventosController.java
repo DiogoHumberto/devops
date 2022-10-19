@@ -1,4 +1,4 @@
-package com.devopseventos.controller;
+package com.springProject.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

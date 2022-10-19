@@ -8,12 +8,12 @@
 		<version>2.7.4</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.devops-eventos</groupId>
-	<artifactId>devops-eventos</artifactId>
+	<groupId>com.springProject</groupId>
+	<artifactId>springProject</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 	<name>devops-eventos</name>
-	<description>Demo project for Spring Boot devops-eventos</description>
+	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>
