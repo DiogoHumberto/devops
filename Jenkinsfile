@@ -8,6 +8,9 @@ pipeline {
                     mvn clean package -DskipTests
                 '''
             }
+            steps {
+                sh 'mvn test'
+            }
         }
     }
 }

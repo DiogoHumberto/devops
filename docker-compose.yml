@@ -6,6 +6,9 @@ services:
     hostname: jenkins-container
     image: jenkins/jenkins:lts-jdk11
     privileged: true
+    command:
+      - apt-get update
+      - apt-get install maven
     user: root
     ports: 
       - 8000:8080
