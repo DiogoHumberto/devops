@@ -11,7 +11,10 @@ pipeline {
         }
         stage ('Testes unit') {
             steps {
-                sh 'mvn test'
+                sh '''
+                    cd springProject
+                    mvn test
+                '''
             }
         }
     }
