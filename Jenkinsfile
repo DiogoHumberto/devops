@@ -40,7 +40,7 @@ pipeline {
         }
         stage ('Deploy') {
             steps {
-                deploy adapters: [tomcat8(credentialsId: 'tomcatLogin', path: '', url: 'http://tomcat:8001')], contextPath: 'spring-project', war: ' springProject/target/springProject-0.0.1-SNAPSHOT.war'
+                deploy adapters: [tomcat8(credentialsId: 'tomcatLogin', path: '', url: 'http://tomcat:8000')], contextPath: 'spring-project', war: ' springProject/target/springProject-0.0.1-SNAPSHOT.war'
 
             }
         }
