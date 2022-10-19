@@ -1,9 +1,12 @@
 pipeline {
     agent any
     stages{
-        stage ('Just Test') {
+        stage ('Build do Projeto') {
             steps {
-                echo 'pipe com sucesso'
+                sh '''
+                    cd springProject
+                    mvn clean package -DskipTests
+                '''
             }
         }
     }
