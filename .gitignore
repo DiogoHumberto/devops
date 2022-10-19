@@ -40,3 +40,7 @@ build/
 /var/
 /jenkins_home**
 /container-tomcat
+
+# exclusion
+mvnw.cmd
+mvnw
