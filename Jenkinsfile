@@ -63,7 +63,9 @@ pipeline {
         }
     }
     post {
-        alwa
+        always {
+            junit allowEmptyResults: true, testResults: 'springProject/target/surefire-reports/*.xml'
+        }
 
     }
 }
