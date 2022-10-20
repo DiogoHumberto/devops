@@ -52,14 +52,18 @@ pipeline {
             steps {
                 sleep(10)
                 script {
-                        int status = sh(script: "curl -sLI -w '%{http_code}' $url -o /dev/null", returnStdout: true)
+                        def status = sh(script: "curl -sLI -w '%{http_code}' $url -o /dev/null", returnStdout: true)
 
-                        if (status != 200 && status != 201) {
+                        if (status.toInteger() != 200 && status.toInteger() != 201) {
                             error("Returned status code = $status when calling $url")
                     }
 
                 }
             }
         }
+    }
+    post {
+        alwa
+
     }
 }
